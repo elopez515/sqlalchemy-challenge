@@ -32,5 +32,27 @@ app = Flask(__name__)
 # Flask Routes
 #################################################
 
+# Set up our home page route
+@app.route("/")
+def Welcome():
+    "Welcome to Hawaii's Climate Analysis and Exploration"
+    return (
+        f"Available Routes:<br/>"
+        f"/api/v1.0/precipitation"
+    )
+
+# Set up our route for the precipitation data
+@app.route("/api/v1.0/precipitation")
+def precipitation():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    #Query precipitation data
+    prcp_df = session.query(measurements.date, measurements.prcp).\
+    filter(measurements.date >= '2016-08-23').all()
+
+    prcp = {date: prcp for date, prcp in prcp_df}
+    return jsonify(prcp)
+
 if __name__ == '__main__':
     app.run(debug=True)
