@@ -38,10 +38,11 @@ def Welcome():
     "Welcome to Hawaii's Climate Analysis and Exploration"
     return (
         f"Available Routes:<br/>"
-        f"/api/v1.0/precipitation<br/>"
-        f"/api/v1.0/stations<br/>"
-        f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/temp/yyyy-mm-dd/yyyy-mm-dd"
+        f"/api/v1.0/temp/yyyy-mm-dd/yyyy-mm-dd<br/>"
+        f"<a href=\"/api/v1.0/precipitation\">Precipitation<br/>"
+        f"<a href=\"/api/v1.0/stations\">Stations<br/>"
+        f"<a href=\"/api/v1.0/tobs\">Temperature Observations(TOBS)<br/>"
+        
     )
 
 # Set up our route for the precipitation data
@@ -85,7 +86,7 @@ def tobs():
     # Return the results
     return jsonify(temps=temp_obs)
 
-# Set up our route allowing user to get back the min, avg, & max
+# Set up our route allowing user to get back the min, avg, & max 
 # --- temperature observation for their imputed date or date range
 @app.route("/api/v1.0/temp/<start>")
 @app.route("/api/v1.0/temp/<start>/<end>")
