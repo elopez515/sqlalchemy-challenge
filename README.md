@@ -16,9 +16,12 @@ To begin, use Python and SQLAlchemy to do basic climate analysis and data explor
 
 * Sort the DataFrame values by `date`.
 
+* Use Pandas to print the summary statistics for the precipitation data.
+
 * Plot the results using the DataFrame `plot` method.
 
-* Use Pandas to print the summary statistics for the precipitation data.
+    ![Prcp_Data_Plot](Prcp_Data_Plot.jpg)
+
 
 ### Station Analysis
 
@@ -35,6 +38,8 @@ To begin, use Python and SQLAlchemy to do basic climate analysis and data explor
   * Filter by the station with the highest number of observations.
 
   * Plot the results as a histogram.
+
+    ![TOBS_Counts_Histogram](TOBS_Counts_Histogram.jpg)
 
 ## Step 2 - Climate App
 
