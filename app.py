@@ -38,7 +38,8 @@ def Welcome():
     "Welcome to Hawaii's Climate Analysis and Exploration"
     return (
         f"Available Routes:<br/>"
-        f"/api/v1.0/precipitation"
+        f"/api/v1.0/precipitation<br/>"
+        f"/api/v1.0/stations<br/>"
     )
 
 # Set up our route for the precipitation data
@@ -54,5 +55,17 @@ def precipitation():
     prcp = {date: prcp for date, prcp in prcp_df}
     return jsonify(prcp)
 
+@app.route("/api/v1.0/stations")
+def stations():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    #Query for all station names 
+    stations_df = session.query(stations_data.station).all()
+
+ #     """Return a list of stations."""
+    stations = list(np.ravel(stations_df))
+    return jsonify(stations=stations)
+  
 if __name__ == '__main__':
     app.run(debug=True)
