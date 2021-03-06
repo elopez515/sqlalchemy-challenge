@@ -40,6 +40,7 @@ def Welcome():
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
+        f"/api/v1.0/tobs<br/>"
     )
 
 # Set up our route for the precipitation data
@@ -67,5 +68,19 @@ def stations():
     stations = list(np.ravel(stations_df))
     return jsonify(stations=stations)
   
+@app.route("/api/v1.0/tobs")
+def tobs():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    #Query for Temperature Observations(TOBS)
+    tobs_df = session.query(measurements.date, measurements.tobs).\
+    filter(measurements.station == 'USC00519281').\
+    filter(measurements.date >= '2016-08-18').all()
+
+    temp_obs = list(np.ravel(tobs_df))
+    # Return the results
+    return jsonify(temps=temp_obs)
+
 if __name__ == '__main__':
     app.run(debug=True)
